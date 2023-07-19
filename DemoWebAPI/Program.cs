@@ -15,6 +15,12 @@ builder.Services.AddSingleton<MyHub>();
 
 builder.Services.AddSignalR();
 
+builder.Services.AddCors(options => options.AddPolicy(
+        "BlazorPolicy", o => o.WithOrigins("https://localhost:7225/")
+                             .WithMethods("GET", "POST").AllowAnyHeader()
+                             .AllowCredentials()
+    )); ;
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -24,8 +30,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors(o => o.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
-
+//app.UseCors(o => o.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+app.UseCors("BlazorPolicy");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
@@ -33,4 +39,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.MapHub<MyHub>("articleHub");
+app.MapHub<ChatHub>("chatHub");
 app.Run();
