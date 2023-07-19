@@ -17,9 +17,9 @@ builder.Services.AddSignalR();
 
 builder.Services.AddCors(options => options.AddPolicy(
         "BlazorPolicy", o => o.WithOrigins("https://localhost:7225/")
-                             .WithMethods("GET", "POST").AllowAnyHeader()
+                             .AllowAnyMethod().AllowAnyHeader()
                              .AllowCredentials()
-    )); ;
+    )); 
 
 var app = builder.Build();
 
@@ -30,8 +30,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-//app.UseCors(o => o.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
-app.UseCors("BlazorPolicy");
+app.UseCors(o => o.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+//app.UseCors("BlazorPolicy");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
