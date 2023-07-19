@@ -4,9 +4,9 @@ namespace DemoWebAPI.Hubs
 {
     public class MyHub : Hub
     {
-        public async Task NotifyArticleUpdate(string s)
+        public async Task NotifyArticleUpdate()
         {
-            await Clients.All.SendAsync("ArticleUpdate", s);
+            await Clients.All.SendAsync("ArticleUpdate");
         }
     }
 }
