@@ -37,8 +37,8 @@ namespace DemoWebAPI.Tools
                 claims: myClaims,
                 signingCredentials: credentials,
                 expires: DateTime.Now.AddDays(1),
-                audience: "https://monAppclient.com",
-                issuer: "https://monserver.com"
+                audience: "https://monAppclient.com", //correspond à une signature client
+                issuer: "https://monserver.com" //correspond à une signature serveur
                 );
 
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();

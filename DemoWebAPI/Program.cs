@@ -37,6 +37,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("AdminPolicy", policy => policy.RequireRole("admin"));
+    //options.AddPolicy("ModeratorPolicy", policy => policy.RequireRole("admin", "modo"));
     options.AddPolicy("IsConnected", policy => policy.RequireAuthenticatedUser());
 });
 
