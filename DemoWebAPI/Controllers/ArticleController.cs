@@ -1,11 +1,13 @@
 ﻿using DemoWebAPI.Entities;
 using DemoWebAPI.Hubs;
 using DemoWebAPI.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DemoWebAPI.Controllers
 {
+    [Authorize("AdminPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class ArticleController : ControllerBase
@@ -18,7 +20,7 @@ namespace DemoWebAPI.Controllers
             _context = context;
             _hub = myHub;
         }
-
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -31,7 +33,7 @@ namespace DemoWebAPI.Controllers
                 return NotFound(EX.Message);
             }
         }
-
+        [Authorize("AdminPolicy")]
         [HttpPost]
         public IActionResult Create([FromBody] Article a)
         {
@@ -45,6 +47,7 @@ namespace DemoWebAPI.Controllers
             return Ok();
         }
 
+        [Authorize("IsConnected")]
         [HttpGet]
         [Route("getById/{id}")]
         public IActionResult GetById(int id)
