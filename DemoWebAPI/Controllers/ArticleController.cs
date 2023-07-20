@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DemoWebAPI.Controllers
 {
-    [Authorize("AdminPolicy")]
+    //[Authorize("AdminPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class ArticleController : ControllerBase
